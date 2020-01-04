@@ -1,17 +1,15 @@
 <?php
+	require "handler.php";
 
+	#creating a user object
+	$user = new User();
 
-function say_hello($firstname, $lastname)
-{
-    return $firstname . " ".  $lastname;
-
-}
-
-$firstname = "Rashid";
-$lastname = "Omar";
-
-
-echo $prt = say_hello($lastname, $firstname);
+	if(isset($_POST['logIn']))
+	{
+		$username = $_POST['name'];
+		$password = $_POST['password'];
+		$user->user_login($username, $password);
+	}
 
 ?>
 <!DOCTYPE html>
@@ -38,9 +36,9 @@ echo $prt = say_hello($lastname, $firstname);
 					</div>
 					<div class="form-group">
 					<div class="col-lg-10 col-lg-offset-2">
-						<button type="submit" class="btn btn-primary" id="login" name="logIn" >login</button>
-						<button type="submit" class="btn btn-primary" id="login" name="admin" >Click to Sin Up</button>
-						<button type="submit" class="btn btn-primary" id="login" name="admin" >forgetten password</button>
+						<button type="submit" class="btn btn-primary" id="login" name="logIn">login</button>
+						<a href="register.php" class="btn btn-primary" >Click to Sin Up</a>
+						<a href="#" class="btn btn-primary">forgetten password </a>
 					</div>
 			</form>
 	</div>

@@ -1,3 +1,18 @@
+<?php
+	require "handler.php";
+
+	#creating a user object
+	$user = new User();
+
+	if(isset($_POST['submit']))
+	{
+		$username = $_POST['name'];
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+		$user->user_register($username, $email, $password);
+	}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,12 +39,6 @@
 						<label class="col-lg-2 control-label">Password</label>
 						<div class="col-lg-10">
 							<input type="password" class="form-control" name="password" id="password">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-lg-2 control-label">Confirm password</label>
-						<div class="col-lg-10">
-							<input type="password" class="form-control" name="password_confirmation" id="con_password">
 						</div>
 					</div>
 					<div class="form-group">

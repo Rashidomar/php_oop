@@ -14,13 +14,27 @@ class User
         $enc_password = md5($password);
         
         #checking to see if the name and email alaredy exists
-        $query = "SELECT * FROM users WHERE name = '$name' AND email='$email' ";
+        $query = "SELECT * FROM users WHERE name = '$name' OR email= '$email' ";
+        
+
+
         $check = mysqli_query($connection, $query);
         $result = mysqli_num_rows($check);
 
         if($result == 0)
         {
-            $query = "INSERT INTO users VALUES ('', '$name', email, $enc_password)";
+            $query = "INSERT INTO users VALUES ('','$name','$email','$enc_password')";
+            $result = mysqli_query($connection, $query);
+
+            if ($result) 
+            {
+                #$_SESSION['username'] = $name;
+                header('Location: homepage.php');	
+            }
+            else
+            {
+                header('Location: register.php');
+            }
 
         }else
         {
@@ -43,9 +57,13 @@ class User
         
         if(mysqli_num_rows($result) == 1)
         {
-            
-        }else{
+            header('Location: homepage.php');	
+        }else
+        {
             echo "invalid username and password";
+            echo $name;
+            echo $password;
+            #echo $enc_password;
         }
 
 
@@ -68,7 +86,7 @@ class User
             $query = "INSERT INTO users VALUES()";
 
         }else{
-            
+
             echo "Wrong password.. Passwors dont match: ";
         }
 
@@ -78,5 +96,6 @@ class User
 
         
     }
+
 
 ?>
