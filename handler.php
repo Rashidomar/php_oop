@@ -28,7 +28,7 @@ class User
 
             if ($result) 
             {
-                #$_SESSION['username'] = $name;
+                $_SESSION['username'] = $name;
                 header('Location: homepage.php');	
             }
             else
@@ -57,16 +57,25 @@ class User
         
         if(mysqli_num_rows($result) == 1)
         {
+            $_SESSION['username'] = $name;
             header('Location: homepage.php');	
         }else
         {
             echo "invalid username and password";
-            echo $name;
-            echo $password;
-            #echo $enc_password;
+        
         }
 
 
+    }
+
+    public function logout_user()
+    {
+        global $connection;
+
+        if (session_destroy()) 
+        {
+            header('Location: index.php');
+        }
     }
 
     #This is method reset a user password
